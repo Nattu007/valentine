@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Happy Valentien Day Thangoooooooo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+  <style>
+    body{
+      margin:0;
+      overflow:hidden;
+      font-family:Arial;
+      background:#ffccd5;
+      text-align:center;
+    }
+
+
+    h1{
+        font-family: 'Great Vibes', cursive;
+          font-size: 48px;
+  color:#e60073;
+}
+
+
+    /* 🎉 Confetti */
+    .confetti{
+      position:fixed;
+      width:10px;
+      height:10px;
+      background:red;
+      top:-10px;
+      animation:fall linear infinite;
+    }
+
+    @keyframes fall{
+      to{
+        transform:translateY(110vh) rotate(360deg);
+      }
+    }
+
+    /* rows */
+    .row{
+      display:flex;
+      gap:20px;
+      position:relative;
+      margin:20px 0;
+    }
+
+    img{
+  width:200px;
+  height:300px;
+  border-radius:15px;
+
+  border:4px solid white;          /* ⭐ border */
+  box-shadow:0 5px 15px rgba(0,0,0,0.3);   /* ⭐ depth */
+}
+    /* first row animation */
+    .move-left{
+      animation: moveLeft 15s linear infinite;
+    }
+
+    @keyframes moveLeft{
+      from{ transform:translateX(100%); }
+      to{ transform:translateX(-100%); }
+    }
+
+    /* second row animation */
+    .move-right{
+      animation: moveRight 15s linear infinite;
+    }
+
+    @keyframes moveRight{
+      from{ transform:translateX(-100%); }
+      to{ transform:translateX(100%); }
+    }
+    /* 🛑 pause rows when mouse over */
+.row:hover{
+  animation-play-state: paused;
+}
+
+  </style>
+</head>
+
+<body>
+
+<h1>Happy Valentien Day Thangoooooooo ❤️🥳</h1>
+
+<!-- 🎉 two photo rows -->
+<div class="row move-left">
+  <img src="photo1.jpg">
+  <img src="photo2.jpg">
+  <img src="photo3.jpg">
+  <img src="photo4.jpg">
+  <img src="photo5.jpg">
+  <img src="photo6.jpg">
+</div>
+
+<div class="row move-right">
+  <img src="photo7.jpg">
+  <img src="photo8.jpg">
+  <img src="photo9.jpg">
+  <img src="photo10.jpg">
+  <img src="photo11.jpg">
+  <img src="photo12.jpg">
+</div>
+
+<script>
+  /* 🎉 generate confetti */
+  for(let i=0;i<40;i++){
+    const c = document.createElement("div");
+    c.className="confetti";
+    c.style.left=Math.random()*100+"vw";
+    c.style.animationDuration=(Math.random()*3+2)+"s";
+    c.style.backgroundColor=
+      ["#ff4d6d","#ffafcc","#cdb4db","#a2d2ff","#ffc8dd"][Math.floor(Math.random()*5)];
+    document.body.appendChild(c);
+  }
+</script>
+
+</body>
+</html>
