@@ -2,7 +2,9 @@
 <html>
 <head>
   <title>Happy Valentien Day Thangoooooooo</title>
+
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+
   <style>
     body{
       margin:0;
@@ -12,20 +14,49 @@
       text-align:center;
     }
 
-
     h1{
-        font-family: 'Great Vibes', cursive;
-          font-size: 48px;
-  color:#e60073;
+      font-family:'Great Vibes', cursive;
+      font-size:48px;
+      color:#e60073;
+      position:relative;
+      z-index:2;
+    }
+
+    /* ❤️ MAIN BOX */
+    .box{
+      width:95%;
+      height:90vh;
+      margin:20px auto;
+      border-radius:20px;
+      overflow:hidden;
+      position:relative;
+      box-shadow:0 0 25px rgba(0,0,0,0.4);
+    }
+
+    /* ❤️ BACKGROUND GRID */
+/* ❤️ MOVING BACKGROUND STRIP */
+.bg-grid{
+  position:absolute;
+  top:0;
+  left:0;
+  height:100%;
+  display:flex;
+  z-index:0;
+  opacity:0.25;
+  animation: scrollBg 60s linear infinite;  /* slow */
 }
 
+.bg-grid img{
+  height:100%;
+  width:auto;
+  object-fit:cover;
+}
 
     /* 🎉 Confetti */
     .confetti{
       position:fixed;
       width:10px;
       height:10px;
-      background:red;
       top:-10px;
       animation:fall linear infinite;
     }
@@ -42,17 +73,18 @@
       gap:20px;
       position:relative;
       margin:20px 0;
+      z-index:2;
     }
 
-    img{
-  width:200px;
-  height:300px;
-  border-radius:15px;
+    .row img{
+      width:200px;
+      height:300px;
+      border-radius:15px;
+      border:4px solid white;
+      box-shadow:0 5px 15px rgba(0,0,0,0.3);
+    }
 
-  border:4px solid white;          /* ⭐ border */
-  box-shadow:0 5px 15px rgba(0,0,0,0.3);   /* ⭐ depth */
-}
-    /* first row animation */
+    /* first row */
     .move-left{
       animation: moveLeft 15s linear infinite;
     }
@@ -62,7 +94,7 @@
       to{ transform:translateX(-100%); }
     }
 
-    /* second row animation */
+    /* second row */
     .move-right{
       animation: moveRight 15s linear infinite;
     }
@@ -71,9 +103,17 @@
       from{ transform:translateX(-100%); }
       to{ transform:translateX(100%); }
     }
-    /* 🛑 pause rows when mouse over */
-.row:hover{
-  animation-play-state: paused;
+
+    .row:hover{
+      animation-play-state: paused;
+    }
+    @keyframes scrollBg{
+  from{
+    transform: translateX(0);
+  }
+  to{
+    transform: translateX(-50%);
+  }
 }
 
   </style>
@@ -81,38 +121,64 @@
 
 <body>
 
-<h1>Happy Valentien Day Thangoooooooo ❤️🥳</h1>
+<div class="box">
 
-<!-- 🎉 two photo rows -->
-<div class="row move-left">
-  <img src="photo1.jpg">
-  <img src="photo2.jpg">
-  <img src="photo3.jpg">
-  <img src="photo4.jpg">
-  <img src="photo5.jpg">
-  <img src="photo6.jpg">
-</div>
+  <!-- ❤️ background collage -->
+  <div class="bg-grid"></div>
 
-<div class="row move-right">
-  <img src="photo7.jpg">
-  <img src="photo8.jpg">
-  <img src="photo9.jpg">
-  <img src="photo10.jpg">
-  <img src="photo11.jpg">
-  <img src="photo12.jpg">
+  <h1>Happy Valentien Day Thangoooooooo ❤️🥳</h1>
+
+  <!-- 🎉 two photo rows -->
+  <div class="row move-left">
+    <img src="photo1.jpg" />
+    <img src="photo2.jpg" />
+    <img src="photo3.jpg" />
+    <img src="photo4.jpg" />
+    <img src="photo5.jpg" />
+    <img src="photo6.jpg" />
+  </div>
+
+  <div class="row move-right">
+    <img src="photo7.jpg" />
+    <img src="photo8.jpg" />
+    <img src="photo9.jpg" />
+    <img src="photo10.jpg" />
+    <img src="photo11.jpg" />
+    <img src="photo12.jpg" />
+  </div>
+
 </div>
 
 <script>
-  /* 🎉 generate confetti */
-  for(let i=0;i<40;i++){
-    const c = document.createElement("div");
-    c.className="confetti";
-    c.style.left=Math.random()*100+"vw";
-    c.style.animationDuration=(Math.random()*3+2)+"s";
-    c.style.backgroundColor=
-      ["#ff4d6d","#ffafcc","#cdb4db","#a2d2ff","#ffc8dd"][Math.floor(Math.random()*5)];
-    document.body.appendChild(c);
-  }
+/* ❤️ fill background grid */
+/* ❤️ fill background */
+const images = [
+  "photo1.jpg","photo2.jpg","photo3.jpg","photo4.jpg",
+  "photo5.jpg","photo6.jpg","photo7.jpg","photo8.jpg",
+  "photo9.jpg","photo10.jpg","photo11.jpg","photo12.jpg"
+];
+
+const grid = document.querySelector(".bg-grid");
+
+/* duplicate twice */
+const fullList = [...images, ...images];
+
+for (let i = 0; i < fullList.length; i++) {
+  const img = document.createElement("img");
+  img.src = fullList[i];
+  grid.appendChild(img);
+}
+
+/* confetti */
+for(let i=0;i<40;i++){
+  const c = document.createElement("div");
+  c.className="confetti";
+  c.style.left=Math.random()*100+"vw";
+  c.style.animationDuration=(Math.random()*3+2)+"s";
+  c.style.backgroundColor=
+    ["#ff4d6d","#ffafcc","#cdb4db","#a2d2ff","#ffc8dd"][Math.floor(Math.random()*5)];
+  document.body.appendChild(c);
+}
 </script>
 
 </body>
